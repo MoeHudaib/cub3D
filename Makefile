@@ -4,7 +4,7 @@ CFLAGS      = -Wall -Wextra -Werror
 IFLAGS      = -Iinclude -Ilibft -Iminilibx-linux
 LFLAGS      = -Lminilibx-linux -lmlx -lXext -lX11 -lm
 LIBFT       = libft/libft.a
-SRC_DIR     = src
+SRC_DIR     = srcs
 OBJ_DIR     = obj
 
 SRCS        = main.c             \
