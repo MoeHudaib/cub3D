@@ -1,16 +1,31 @@
-NAME = cub3D
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-IFLAGS = -Iinclude -Ilibft -Iminilibx-linux
-LFLAGS = -Lminilibx-linux -lmlx -lXext -lX11 -lm
-LIBFT = libft/libft.a
-SRC_DIR = src
-OBJ_DIR = obj
-SRCS = main.c parse.c parse_lines.c parse_color.c parse_map.c \
-        parse_tex.c parse_utils.c validate_map.c init.c texture.c \
-        render.c raycast.c draw.c draw_utils.c hooks.c loop.c move.c \
-        rotate.c cleanup.c errors.c
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+NAME        = cub3D
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror
+IFLAGS      = -Iinclude -Ilibft -Iminilibx-linux
+LFLAGS      = -Lminilibx-linux -lmlx -lXext -lX11 -lm
+LIBFT       = libft/libft.a
+SRC_DIR     = src
+OBJ_DIR     = obj
+
+SRCS        = main.c             \
+              engine_loop.c      \
+              input_hooks.c      \
+              player_movement.c  \
+              raycaster.c        \
+              renderer.c         \
+              column_draw.c      \
+              mlx_setup.c        \
+              map_init.c         \
+              file_parser.c      \
+              line_processor.c   \
+              color_parser.c     \
+              texture_parser.c   \
+              map_validator.c    \
+              parser_utils.c     \
+              cleanup.c          \
+              error_handlers.c
+
+OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
@@ -20,7 +35,7 @@ $(NAME): $(LIBFT) $(OBJS)
 $(LIBFT):
 	$(MAKE) -C libft
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c include/cub3d.h | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c include/game.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
